@@ -1,4 +1,4 @@
-package High;
+package Hijack;
 
 public class CustomerList implements CustomerListInterface {
 
