@@ -1,4 +1,4 @@
-import Hijack.CustomerList;
+import High.CustomerList;
 
 public class main {
 
