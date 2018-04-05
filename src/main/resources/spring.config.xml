@@ -9,9 +9,9 @@
 
         <aop:aspectj-autoproxy />
 
-        <bean id="customerList" class="Hijack.CustomerList" />
+        <bean id="customerList" class="High.CustomerList" />
 
         <!-- Aspect -->
-        <bean id="hijackAspect" class="Hijack.HijackAspect" />
+        <bean id="hijackAspect" class="High.HijackAspect" />
 
 </beans>
