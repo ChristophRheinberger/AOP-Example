@@ -1,5 +1,7 @@
 package ReadWrite;
 
+import static java.lang.Thread.sleep;
+
 /**
  * Created by ClemensB on 07.04.18.
  */
@@ -14,6 +16,13 @@ public class AspectAccount {
 
         public void credit(float amount) {
             setBalance(getBalance() + amount);
+            try {
+                Thread one = new MyThread(this);
+                one.start();
+                sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
         }
 
         public void debit(float amount) throws InsufficientBalanceException {
