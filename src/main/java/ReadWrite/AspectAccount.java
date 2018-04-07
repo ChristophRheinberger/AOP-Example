@@ -3,7 +3,7 @@ package ReadWrite;
 /**
  * Created by ClemensB on 07.04.18.
  */
-public abstract class AspectAccount {
+public class AspectAccount {
         private float _balance;
         private int _accountNumber;
 
