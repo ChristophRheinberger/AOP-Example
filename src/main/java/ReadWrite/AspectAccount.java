@@ -1,5 +1,7 @@
 package ReadWrite;
 
+import static java.lang.Thread.sleep;
+
 /**
  * Created by ClemensB on 07.04.18.
  */

@@ -1,3 +1,4 @@
+import ReadWrite.Account;
 import ReadWrite.AspectAccount;
 import ReadWrite.InsufficientBalanceException;
 import java.util.concurrent.ExecutorService;
@@ -18,6 +19,8 @@ public class lockMain {
         ExecutorService threadPool = Executors.newFixedThreadPool(2);
         threadPool.submit(new MyThread(1000));
         threadPool.submit(new MyThread(2000));
+
+        threadPool.shutdown();
 
     }
 
