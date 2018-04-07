@@ -11,7 +11,7 @@ public class lockMain {
     static AspectAccount account = new AspectAccount(1);
 
     public static void main(String[] args ) {
-        account.setBalance(1000);
+        account.setBalance(5000);
 
         account.credit(1000);
 

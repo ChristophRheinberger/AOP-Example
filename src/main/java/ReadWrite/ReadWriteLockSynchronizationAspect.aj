@@ -7,10 +7,9 @@ import EDU.oswego.cs.dl.util.concurrent.*;
  */
 public aspect ReadWriteLockSynchronizationAspect{
 
-        public pointcut readOperations() : execution(* AspectAccount.get*(..)) || execution(* AspectAccount.toString(..));
+        public pointcut readOperations() : execution(* *.get*(..)) || execution(* *.toString(..));
 
-        public pointcut writeOperations() : execution(* AspectAccount.credit*(..))
-            && !readOperations();
+        public pointcut writeOperations() : execution(* *.credit*(..)) || execution(* *.debit*(..));
 
         private ReadWriteLock lock = new ReentrantWriterPreferenceReadWriteLock();
 

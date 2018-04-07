@@ -1,7 +1,5 @@
 package ReadWrite;
 
-import static java.lang.Thread.sleep;
-
 /**
  * Created by ClemensB on 07.04.18.
  */
@@ -15,27 +13,20 @@ public class AspectAccount {
         }
 
         public void credit(float amount) {
-            setBalance(_balance + amount);
-            System.out.println("Amount added, Balance is: " + this._balance);
-
-            // Only for demonstration purposes
-            try {
-                sleep(5000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-            // demonstration purposes end
+            setBalance(this.getBalance() + amount);
+            System.out.println("Amount added, Balance is: " + this.getBalance());
         }
 
         public void debit(float amount) throws InsufficientBalanceException {
-            float balance = _balance;
+            float balance = this.getBalance();
 
             if (balance < amount) {
                 throw new InsufficientBalanceException("Total balance not sufficient");
             } else {
                 setBalance(balance - amount);
             }
-            System.out.println("Amount withdrawn, Balance is: " + this._balance);
+
+            System.out.println("Amount withdrawn, Balance is: " + this.getBalance());
         }
 
         public float getBalance() {
