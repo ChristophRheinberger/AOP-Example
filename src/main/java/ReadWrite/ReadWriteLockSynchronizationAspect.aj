@@ -5,9 +5,12 @@ import EDU.oswego.cs.dl.util.concurrent.*;
 /**
  * Created by ClemensB on 07.04.18.
  */
-public abstract aspect ReadWriteLockSynchronizationAspect perthis(readOperations() || writeOperations()) {
-        public abstract pointcut readOperations();
-        public abstract pointcut writeOperations();
+public abstract aspect ReadWriteLockSynchronizationAspect{
+
+        public pointcut readOperations() : execution(* Account.get*(..)) || execution(* Account.toString(..));
+
+        public pointcut writeOperations() : execution(* Account.*(..))
+            && !readOperations();
 
         private ReadWriteLock lock = new ReentrantWriterPreferenceReadWriteLock();
 
