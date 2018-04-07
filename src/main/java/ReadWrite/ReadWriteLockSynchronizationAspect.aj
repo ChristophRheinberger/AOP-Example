@@ -21,6 +21,7 @@ public abstract aspect ReadWriteLockSynchronizationAspect perthis(readOperations
         after() : readOperations() {
             lock.readLock().release();
         }
+
         before() : writeOperations() {
             try {
                 lock.writeLock().acquire();
@@ -28,9 +29,11 @@ public abstract aspect ReadWriteLockSynchronizationAspect perthis(readOperations
                 e.printStackTrace();
             }
         }
+
         after() : writeOperations() {
             lock.writeLock().release();
         }
+
         static aspect SoftenInterruptedException {
             declare soft : InterruptedException :
             call(void Sync.acquire());
