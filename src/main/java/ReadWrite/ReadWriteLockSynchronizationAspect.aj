@@ -9,27 +9,27 @@ public aspect ReadWriteLockSynchronizationAspect{
 
         public pointcut readOperations() : execution(* *.get*(..)) || execution(* *.toString(..));
 
-        public pointcut writeOperations() : execution(* *.credit*(..)) || execution(* *.debit*(..));
+        public pointcut writeOperations() : execution(* *.credit*(..)) || execution(* *.debit*(..)) || execution(* *.set*(..));
 
         private ReadWriteLock lock = new ReentrantWriterPreferenceReadWriteLock();
 
         before() : readOperations() {
             try {
                 lock.readLock().acquire();
-                System.out.println("ReadLock acquired!");
+                System.out.println("ReadLock acquired by: " + thisJoinPoint.toString());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         after() : readOperations() {
             lock.readLock().release();
-            System.out.println("ReadLock released!");
+            System.out.println("ReadLock released by: " + thisJoinPoint.toString());
         }
 
         before() : writeOperations() {
             try {
                 lock.writeLock().acquire();
-                System.out.println("WriteLock acquired!");
+                System.out.println("WriteLock acquired: " + thisJoinPoint.toString());
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -37,11 +37,6 @@ public aspect ReadWriteLockSynchronizationAspect{
 
         after() : writeOperations() {
             lock.writeLock().release();
-            System.out.println("WriteLock released!");
-        }
-
-        static aspect SoftenInterruptedException {
-            declare soft : InterruptedException :
-                call(void Sync.acquire());
+            System.out.println("WriteLock released by: " + thisJoinPoint.toString());
         }
 }
