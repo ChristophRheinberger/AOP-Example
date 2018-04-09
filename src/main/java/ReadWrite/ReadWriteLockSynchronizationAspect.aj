@@ -2,6 +2,8 @@ package ReadWrite;
 
 import EDU.oswego.cs.dl.util.concurrent.*;
 
+import static java.lang.Thread.sleep;
+
 /**
  * Created by ClemensB on 07.04.18.
  */
@@ -16,6 +18,7 @@ public aspect ReadWriteLockSynchronizationAspect{
         before() : readOperations() {
             try {
                 lock.readLock().acquire();
+                sleep(1000);
                 System.out.println("ReadLock acquired!");
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -29,6 +32,7 @@ public aspect ReadWriteLockSynchronizationAspect{
         before() : writeOperations() {
             try {
                 lock.writeLock().acquire();
+                sleep(1000);
                 System.out.println("WriteLock acquired!");
             } catch (InterruptedException e) {
                 e.printStackTrace();
@@ -38,10 +42,5 @@ public aspect ReadWriteLockSynchronizationAspect{
         after() : writeOperations() {
             lock.writeLock().release();
             System.out.println("WriteLock released!");
-        }
-
-        static aspect SoftenInterruptedException {
-            declare soft : InterruptedException :
-                call(void Sync.acquire());
         }
 }

@@ -21,7 +21,7 @@ public class Account {
         try {
             lock.writeLock().acquire();
 
-            sleep(5000);
+            sleep(1000);
 
             System.out.println("Writelock acquired");
 
@@ -38,7 +38,7 @@ public class Account {
             try {
                 lock.writeLock().acquire();
 
-                sleep(5000);
+                sleep(1000);
 
                 System.out.println("Writelock acquired");
 

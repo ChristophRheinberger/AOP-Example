@@ -7,7 +7,7 @@ import java.util.concurrent.Executors;
 /**
  * Created by Christoph on 07.04.2018.
  */
-public class lockMain {
+public class readWriteTestAOP {
 
     static AspectAccount account = new AspectAccount(1);
 
@@ -24,7 +24,7 @@ public class lockMain {
 
     }
 
-    private static class MyThread implements Runnable {
+    static class MyThread implements Runnable {
 
         private int i;
 
