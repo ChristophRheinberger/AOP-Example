@@ -9,9 +9,9 @@ import static java.lang.Thread.sleep;
  */
 public aspect ReadWriteLockSynchronizationAspect{
 
-        public pointcut readOperations() : execution(* *.get*(..)) || execution(* *.toString(..));
+        public pointcut readOperations() : execution(* AspectAccount.get*(..)) || execution(* AspectAccount.toString(..));
 
-        public pointcut writeOperations() : execution(* *.credit*(..)) || execution(* *.debit*(..));
+        public pointcut writeOperations() : execution(* AspectAccount.credit*(..)) || execution(* AspectAccount.debit*(..)) || execution(* AspectAccount.set*(..));
 
         private ReadWriteLock lock = new ReentrantWriterPreferenceReadWriteLock();
 

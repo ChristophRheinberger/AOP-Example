@@ -16,7 +16,7 @@ public class AspectAccount {
 
         public void credit(float amount) {
             setBalance(this.getBalance() + amount);
-            System.out.println("Amount added, Balance is: " + this.getBalance());
+            System.out.println("Amount added, Balance is: " + _balance);
         }
 
         public void debit(float amount) throws InsufficientBalanceException {
@@ -28,7 +28,7 @@ public class AspectAccount {
                 setBalance(balance - amount);
             }
 
-            System.out.println("Amount withdrawn, Balance is: " + this.getBalance());
+            System.out.println("Amount withdrawn, Balance is: " + _balance);
         }
 
         public float getBalance() {

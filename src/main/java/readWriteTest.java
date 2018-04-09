@@ -5,9 +5,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 /**
- * Created by Clemens on 05.04.2018.
+ * Created by Christoph on 07.04.2018.
  */
 public class readWriteTest {
+
     static Account account = new Account(1);
 
     public static void main(String[] args ) {
@@ -16,14 +17,14 @@ public class readWriteTest {
         account.credit(1000);
 
         ExecutorService threadPool = Executors.newFixedThreadPool(2);
-        threadPool.submit(new readWriteTestAOP.MyThread(1000));
-        threadPool.submit(new readWriteTestAOP.MyThread(2000));
+        threadPool.submit(new MyThread(1000));
+        threadPool.submit(new MyThread(2000));
 
         threadPool.shutdown();
 
     }
 
-    private static class MyThread implements Runnable {
+    static class MyThread implements Runnable {
 
         private int i;
 

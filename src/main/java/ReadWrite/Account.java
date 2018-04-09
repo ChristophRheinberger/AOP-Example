@@ -23,14 +23,15 @@ public class Account {
 
             sleep(1000);
 
-            System.out.println("Writelock acquired");
+            System.out.println("Writelock acquired by: credit");
 
                 setBalance(getBalance() + amount);
             } catch (InterruptedException ex) {
             throw new RuntimeException(ex);
             } finally {
                 lock.writeLock().release();
-                System.out.println("Writelock released: " +  + _balance);
+                System.out.println("Writelock released by: creadit");
+                System.out.println("Amount added, Balance is: " + _balance);
             }
     }
 
@@ -40,7 +41,7 @@ public class Account {
 
                 sleep(1000);
 
-                System.out.println("Writelock acquired");
+                System.out.println("Writelock acquired by: debit");
 
                 float balance = getBalance();
                 if (balance < amount) {
@@ -52,7 +53,8 @@ public class Account {
                 throw new RuntimeException(ex);
             } finally {
                 lock.writeLock().release();
-                System.out.println("Writelock released: " + _balance);
+                System.out.println("Writelock released by: debit");
+                System.out.println("Amount withdrawn, Balance is: " + _balance);
             }
     }
 
@@ -61,26 +63,26 @@ public class Account {
         try {
             lock.readLock().acquire();
 
-            System.out.println("Readlock acquired");
+            System.out.println("Readlock acquired by: getBalance");
             return _balance;
         } catch (InterruptedException ex) {
             throw new RuntimeException(ex);
         } finally {
             lock.readLock().release();
-            System.out.println("Readlock released");
+            System.out.println("Readlock released by: getBalance");
         }
         }
     public void setBalance(float balance) {
         try {
             lock.writeLock().acquire();
 
-            System.out.println("Writelock acquired:");
+            System.out.println("Writelock acquired by: setBalance");
             _balance = balance;
             } catch (InterruptedException ex) {
             throw new RuntimeException(ex);
             } finally {
             lock.writeLock().release();
-            System.out.println("Writelock released");
+            System.out.println("Writelock released by: setBalance");
             }
     }
 }
