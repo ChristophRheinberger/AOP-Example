@@ -6,13 +6,13 @@ import java.util.regex.Pattern;
 /**
  * Created by Christoph on 07.04.2018.
  */
+
 public aspect InputValidator {
 
     private Pattern pattern;
     private final String patternString = "[a-zA-Z0-9@;\\/$.]*";
 
-    pointcut myPointcut(String argument):   execution(* Car.set*(String))
-                                            && args(argument);
+    pointcut myPointcut(String argument):   execution(* Car.set*(String)) && args(argument);
 
     before (String argument): myPointcut(argument) {
         Matcher matcher;
@@ -20,8 +20,8 @@ public aspect InputValidator {
         if (pattern == null) {
             pattern = Pattern.compile(patternString);
         }
-        if (argument == null) {
-            throw new IllegalArgumentException("Argument is NULL!");
+        if (argument == null || argument.equals("")) {
+            throw new IllegalArgumentException("Argument is NULL or EMPTY!");
         }
         matcher = pattern.matcher(argument);
 

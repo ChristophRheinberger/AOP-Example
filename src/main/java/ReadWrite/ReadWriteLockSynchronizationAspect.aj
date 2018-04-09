@@ -9,27 +9,29 @@ public aspect ReadWriteLockSynchronizationAspect{
 
         public pointcut readOperations() : execution(* *.get*(..)) || execution(* *.toString(..));
 
-        public pointcut writeOperations() : execution(* *.credit*(..)) || execution(* *.debit*(..)) || execution(* *.set*(..));
+        public pointcut writeOperations() : execution(* *.credit*(..)) || execution(* *.debit*(..));
 
         private ReadWriteLock lock = new ReentrantWriterPreferenceReadWriteLock();
 
         before() : readOperations() {
             try {
                 lock.readLock().acquire();
-                System.out.println("ReadLock acquired by: " + thisJoinPoint.toString());
+                sleep(1000);
+                System.out.println("ReadLock acquired!");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
         after() : readOperations() {
             lock.readLock().release();
-            System.out.println("ReadLock released by: " + thisJoinPoint.toString());
+            System.out.println("ReadLock released!");
         }
 
         before() : writeOperations() {
             try {
                 lock.writeLock().acquire();
-                System.out.println("WriteLock acquired: " + thisJoinPoint.toString());
+                sleep(1000);
+                System.out.println("WriteLock acquired!");
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
@@ -37,6 +39,6 @@ public aspect ReadWriteLockSynchronizationAspect{
 
         after() : writeOperations() {
             lock.writeLock().release();
-            System.out.println("WriteLock released by: " + thisJoinPoint.toString());
+            System.out.println("WriteLock released!");
         }
 }
